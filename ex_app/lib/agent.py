@@ -5,7 +5,7 @@ import os
 import random
 import string
 from collections.abc import Awaitable, Callable
-from datetime import date
+from datetime import time
 from time import monotonic
 from typing import Any, cast
 
@@ -129,12 +129,12 @@ async def react(
 			state: AgentState,
 			config: RunnableConfig,
 	):
-		current_date = date.today().strftime("%Y-%m-%d")
-
+		current_time = time.now().strftime("%Y-%m-%d %H:%M:%S")
+		
 		system_prompt_text = """
 You are a helpful AI assistant with access to tools, please respond to the user's query to the best of your ability, using the provided tools if necessary. If no tool is needed to provide a correct answer, do not use one. If you used a tool, you still need to convey its output to the user.
 Use the same language for your answers as the user used in their message.
-Today is {CURRENT_DATE}.
+Current date and time is {CURRENT_TIME}. Local timezone is Europe/Berlin. You are running in a Nextcloud environment, you have access to the user's files, emails, and calendar events. You can also use the internet to fetch information if needed. If you need to use a tool, please make sure to use it correctly and provide the necessary input. If you are unsure about how to use a tool, please ask the user for clarification.
 Intuit the language the user is using (there is no tool for this, you will need to guess). Reply in the language intuited. Do not output the language you intuited.
 Only use tools if you cannot answer the user without them.
 If you get a link as a tool output, always add the link to your response.
@@ -183,7 +183,7 @@ At the end of each message to the user, if you have carried out a task or answer
 
 		# this is similar to customizing the create_react_agent with state_modifier, but is a lot more flexible
 		system_prompt = SystemMessage(
-			system_prompt_text.replace("{CURRENT_DATE}", current_date)
+			system_prompt_text.replace("{CURRENT_TIME}", current_time)
 		)
 
 		response = await bound_model.ainvoke([system_prompt] + state["messages"], config)

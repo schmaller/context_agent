@@ -2,6 +2,8 @@
   - SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
+# !!! private fork - don't use as official build !!!
+
 # context_agent
 
 [![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/context_agent)](https://api.reuse.software/info/github.com/nextcloud/context_agent)
