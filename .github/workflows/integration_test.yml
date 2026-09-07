@@ -4,11 +4,10 @@
 name: Integration test
 
 on:
-  pull_request:
   push:
     branches:
-      - main
-      - stable*
+      - main-release
+      - stable-release*
 
 env:
   APP_NAME: context_agent
