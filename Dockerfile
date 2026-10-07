@@ -36,11 +36,7 @@ COPY poetry.lock .
 ENV PATH="/root/.local/bin:${PATH}"
 RUN poetry install
 
-ADD /ex_app/cs[s] /ex_app/css
-ADD /ex_app/im[g] /ex_app/img
-ADD /ex_app/j[s] /ex_app/js
-ADD /ex_app/l10[n] /ex_app/l10n
-ADD /ex_app/li[b] /ex_app/lib
+COPY ex_app/lib /ex_app/lib
 
 COPY --chmod=775 healthcheck.sh /
 COPY --chmod=775 start.sh /

@@ -5,7 +5,8 @@ import os
 import random
 import string
 from collections.abc import Awaitable, Callable
-from datetime import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from time import monotonic
 from typing import Any, cast
 
@@ -129,8 +130,7 @@ async def react(
 			state: AgentState,
 			config: RunnableConfig,
 	):
-		current_time = time.now().strftime("%Y-%m-%d %H:%M:%S")
-		
+		current_time = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%Y-%m-%d %H:%M:%S")
 		system_prompt_text = """
 You are a helpful AI assistant with access to tools, please respond to the user's query to the best of your ability, using the provided tools if necessary. If no tool is needed to provide a correct answer, do not use one. If you used a tool, you still need to convey its output to the user.
 Use the same language for your answers as the user used in their message.
